@@ -71,6 +71,6 @@ public class ConnectionFactory {
                 e.printStackTrace();
             }
         }
-        return true;
+        return flag;
     }
 }

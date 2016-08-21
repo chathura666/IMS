@@ -165,6 +165,7 @@ public class LoginDialog extends javax.swing.JDialog {
   
     private String encryptPassword(String input){
         String encPass=null;
+               //input = "c4ca4238a0b923820dcc509a6f75849b";
         if(input==null) return null;
         
         try{
@@ -175,7 +176,9 @@ public class LoginDialog extends javax.swing.JDialog {
         catch(Exception e){
             e.printStackTrace();
         }
+        //System.out.println(encPass);
         return encPass;
+        
     }
     
     String user;
