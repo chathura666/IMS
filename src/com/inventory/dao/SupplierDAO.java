@@ -85,6 +85,7 @@ public class SupplierDAO {
     
     public void editSupplierDAO(SupplierDTO supplierdto) {
             try {
+
                 String query = "UPDATE suppliers SET suppliercode=?,fullname=?,location=?,phone=? WHERE suppliercode=?";
                 pstmt = (PreparedStatement) con.prepareStatement(query);
                 pstmt.setString(1, supplierdto.getSupplierCode());
@@ -113,7 +114,7 @@ public class SupplierDAO {
 
     public ResultSet getQueryResult() {
         try {
-            String query = "SELECT suppliercode AS SupplierCode, fullname AS Name, location as Address, phone AS Phone FROM suppliers";
+            String query = "SELECT suppliercode AS SupplierCode, fullname AS Name, location as Address, phone AS Phone FROM suppliers ORDER BY sid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();

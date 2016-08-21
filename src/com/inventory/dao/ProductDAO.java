@@ -234,32 +234,6 @@ public class ProductDAO {
             e.printStackTrace();
         }
 
-        String productCode = productdto.getProductCode();
-        if (checkStock(productCode) == true) {
-            try {
-                String q = "UPDATE currentstocks SET quantity=quantity+? WHERE productcode=?";
-                pstmt = (PreparedStatement) con.prepareStatement(q);
-                pstmt.setDouble(1, productdto.getQuantity());
-                pstmt.setString(2, productdto.getProductCode());
-
-                pstmt.executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (checkStock(productCode) == false) {
-            try {
-                String q = "INSERT INTO currentstocks VALUES(?,?)";
-                pstmt = (PreparedStatement) con.prepareStatement(q);
-
-                pstmt.setString(1, productdto.getProductCode());
-                pstmt.setInt(2, productdto.getQuantity());
-                pstmt.executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        deleteStock();
-
     }
 
     public void editProductDAO(ProductDTO productdto) {
@@ -356,14 +330,14 @@ public class ProductDAO {
      */
     public void addGRNDAO(ProductDTO productdto) {
         try {
-            String q = "INSERT INTO ginfo VALUES(null,?,?,?,?,?,?)";
+            String q = "INSERT INTO grninfo VALUES(null,?,?,?,?,?,?)";
             pstmt = (PreparedStatement) con.prepareStatement(q);
-            pstmt.setString(1, productdto.getSupplierCode());
-            pstmt.setString(2, productdto.getProductCode());
-            pstmt.setString(3, productdto.getDate());
-            pstmt.setInt(4, productdto.getQuantity());
-            pstmt.setDouble(5, productdto.getTotalCost());
-            pstmt.setString(6, Integer.toString(productdto.getPoid()));
+            pstmt.setString(1, Integer.toString(productdto.getPoid()));
+            pstmt.setString(2, productdto.getSupplierCode());
+            pstmt.setString(3, productdto.getProductCode());
+            pstmt.setString(4, productdto.getDate());
+            pstmt.setInt(5, productdto.getQuantity());
+            pstmt.setDouble(6, productdto.getTotalCost());
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Inserted Successfully");
         } catch (Exception e) {
@@ -432,7 +406,7 @@ public class ProductDAO {
 
     public void deleteStock() {
         try {
-            String q = "DELETE FROM currentstocks WHERE productcode NOT IN(SELECT productcode FROM purchaseinfo)";
+            String q = "DELETE FROM currentstocks WHERE productcode NOT IN(SELECT productcode FROM grninfo)";
             String q1 = "DELETE FROM salesreport WHERE productcode NOT IN(SELECT productcode FROM products)";
             stmt.executeUpdate(q);
             stmt.executeUpdate(q1);
@@ -457,6 +431,19 @@ public class ProductDAO {
     public void deletePurchaseDAO(String value) {
         try {
             String query = "delete from purchaseinfo where purchaseid=?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, value);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Deleted..");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        deleteStock();
+    }
+
+    public void deleteGRNDAO(String value) {
+        try {
+            String query = "delete from grninfo where grnid=?";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, value);
             pstmt.executeUpdate();
@@ -527,7 +514,7 @@ public class ProductDAO {
 
     public ResultSet getPurchaseResult() {
         try {
-            String query = "SELECT suppliercode,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode ORDER BY purchaseid";
+            String query = "SELECT purchaseid,suppliercode,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode ORDER BY purchaseid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -537,7 +524,7 @@ public class ProductDAO {
 
     public ResultSet getGRNResult() {
         try {
-            String query = "SELECT GRNid,poidm,purchaseinfo.suppliercode,productcode,quantity,totalcost,date FROM grninfo INNER JOIN purchaseinfo ON grninfo.poidm=purchaseinfo.purchaseid ORDER BY GRNid";
+            String query = "SELECT GRNid,poid,suppliercode,productcode,quantity,totalcost FROM grninfo ORDER BY GRNid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -615,10 +602,35 @@ public class ProductDAO {
         return rs;
     }
 
+    public ResultSet getPurchaseCode(String pcode) {
+        try {
+            String query = "SELECT purchaseid FROM purchaseinfo WHERE purchaseid='" + pcode + "'";
+            rs = stmt.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     public String getProductsSupplier(int id) {
         String sup = null;
         try {
-            String query = "SELECT fullname FROM suppliers INNER JOIN purchaseinfo ON suppliers.suppliercode=purchaseinfo.suppliercode WHERE purchaseid='" + id + "'";
+            String query = "SELECT fullname FROM suppliers INNER JOIN purchaseinfo ON suppliers.suppliercode=purchaseinfo.suppliercode WHERE purchaseid=" + id;
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                sup = rs.getString("fullname");
+            }
+            System.out.println(sup);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sup;
+    }
+
+    public String getProductsSupplierGRN(int id) {
+        String sup = null;
+        try {
+            String query = "SELECT fullname FROM suppliers INNER JOIN grninfo ON suppliers.suppliercode=grninfo.suppliercode WHERE poid='" + id + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 sup = rs.getString("fullname");
@@ -641,6 +653,20 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return cus;
+    }
+
+    public String getOrderdDateGRN(int pur) {
+        String p = null;
+        try {
+            String query = "SELECT date FROM grninfo WHERE poid='" + pur + "'";
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                p = rs.getString("date");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return p;
     }
 
     public String getOrderdDate(int pur) {

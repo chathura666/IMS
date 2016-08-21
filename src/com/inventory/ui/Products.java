@@ -213,7 +213,7 @@ public class Products extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productNameLab)
                     .addComponent(productNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(costPriceLab)
                     .addComponent(costPriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -238,7 +238,7 @@ public class Products extends javax.swing.JPanel {
                         .addComponent(jLabel8)
                         .addComponent(jLabel6))
                     .addComponent(jLabel2))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("PRODUCTS", jPanel1);
@@ -506,7 +506,7 @@ public class Products extends javax.swing.JPanel {
     private javax.swing.JLabel productNameLab;
     private javax.swing.JLabel productNameLab1;
     private javax.swing.JTextField productNameTxt;
-    private javax.swing.JPanel productsPanel;
+    public javax.swing.JPanel productsPanel;
     private javax.swing.JButton refreshBttn;
     private javax.swing.JLabel searchByLab;
     private javax.swing.JTextField searchTxt;

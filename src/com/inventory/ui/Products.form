@@ -239,7 +239,7 @@
                               <Component id="productNameLab" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="productNameTxt" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="costPriceLab" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="costPriceTxt" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -270,7 +270,7 @@
                               </Group>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="83" max="32767" attributes="0"/>
+                          <EmptySpace pref="58" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
