@@ -14,9 +14,10 @@ import java.sql.ResultSet;
  */
 public class ProductDTO {
 
-    private int productId;
+    private String productId;
     private int poid;
     private String productCode;
+    private String oldproductCode;
     private String date;
     private String sellDate;
     private String supplierCode;
@@ -25,11 +26,21 @@ public class ProductDTO {
     private double costPrice;
     private double sellingPrice;
     private String brand;
+    private String description;
     private int userId;
     private String customersName;
+
+    public String getPurchaseID() {
+        return purchaseID;
+    }
+
+    public void setPurchaseID(String purchaseID) {
+        this.purchaseID = purchaseID;
+    }
     private String customerCode;
     private Double totalCost;
     private Double totalRevenue;
+    private String purchaseID;
 
     public int getPoid() {
         return poid;
@@ -39,12 +50,28 @@ public class ProductDTO {
         this.poid = poid;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getOldproductCode() {
+        return oldproductCode;
+    }
+
+    public void setOldproductCode(String oldproductCode) {
+        this.oldproductCode = oldproductCode;
     }
 
     public String getProductCode() {

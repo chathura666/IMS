@@ -42,113 +42,98 @@ public class UserDAO {
     }
 
     public void addUserDAO(UserDTO userdto, String user) {
-        try{
-            String query = "SELECT * FROM users WHERE fullname='"+userdto.getFullName()+"' AND location='"+userdto.getLocation()+"' AND phone='"+userdto.getPhone()+"' AND category='"+userdto.getCategory()+"'";
-            rs=stmt.executeQuery(query);
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null,"Same User has already been added!");
-            }else{
+        try {
+            String query = "SELECT * FROM users WHERE fullname='" + userdto.getFullName() + "' AND location='" + userdto.getLocation() + "' AND phone='" + userdto.getPhone() + "' AND category='" + userdto.getCategory() + "'";
+            rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Same User has already been added!");
+            } else {
                 addFunction(userdto, user);
             }
-        }catch(Exception e){
-                e.printStackTrace();
-        }   
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//end of method addUserDTO
-    
-    public void addFunction(UserDTO userdto, String user){
-        try{
-            String username = null;
-            String password = null;
-            String oldUsername = null;
-            String encPass=null;
-            String query1="SELECT * FROM users";
-            rs=stmt.executeQuery(query1);
-            if(!rs.next()){
-                username="user"+"1";
-                password="user"+"1";
-            }
-            else{
-                String query2="SELECT * FROM users ORDER by id DESC";
-                rs=stmt.executeQuery(query2);
-                if(rs.next()){
-                    oldUsername=rs.getString("username");
-                    Integer ucode=Integer.parseInt(oldUsername.substring(4));
-                    ucode++;    
-                    username="user"+ucode;
-                    password="user"+ucode;
-                }
-                encPass=new Users().encryptPassword(password);
-            }
+
+    public void addFunction(UserDTO userdto, String user) {
+        try {
+
+            String password = userdto.getPassword();
+
+            String encPass = null;
+
+            encPass = new Users().encryptPassword(password);
 
             String query = "INSERT INTO users (fullname,location, phone, username, password, category) VALUES(?,?,?,?,?,?)";
             pstmt = (PreparedStatement) con.prepareStatement(query);
             pstmt.setString(1, userdto.getFullName());
             pstmt.setString(2, userdto.getLocation());
             pstmt.setString(3, userdto.getPhone());
-            pstmt.setString(4, username);
+            pstmt.setString(4, userdto.getUsername());
             pstmt.setString(5, encPass);
             pstmt.setString(6, userdto.getCategory());
             pstmt.executeUpdate();
-            if("ADMINISTRATOR".equals(user))
+            if ("ADMINISTRATOR".equals(user)) {
                 JOptionPane.showMessageDialog(null, "NEW ADMINISTRATOR ADDED");
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, "NEW NORMAL USER ADDED");
-        }catch(Exception e){
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-                    
+
     }
-   
+
     public void editUserDAO(UserDTO userdto) {
-            try {
-                String query = "UPDATE users SET fullname=?,location=?,phone=?,category=? WHERE username=?";
+        try {
+            String query = "UPDATE users SET fullname=?,location=?,phone=?,category=? WHERE username=?";
+            pstmt = (PreparedStatement) con.prepareStatement(query);
+            pstmt.setString(1, userdto.getFullName());
+            pstmt.setString(2, userdto.getLocation());
+            pstmt.setString(3, userdto.getPhone());
+            pstmt.setString(4, userdto.getCategory());
+            pstmt.setString(5, userdto.getUsername());
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Updated");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//end of method editUserDTO
+
+    public void editFunction(UserDTO userdto, String imgLink, File file) {
+
+        try {
+            if (imgLink.equals("")) {
+
+            } else {
+                String query = "UPDATE users SET fullname=?,location=?,phone=?,username=?,password=?,category=?,image=? WHERE id=?";
+                FileInputStream fis = new FileInputStream(file);
                 pstmt = (PreparedStatement) con.prepareStatement(query);
                 pstmt.setString(1, userdto.getFullName());
                 pstmt.setString(2, userdto.getLocation());
                 pstmt.setString(3, userdto.getPhone());
-                pstmt.setString(4, userdto.getCategory());
-                pstmt.setString(5, userdto.getUsername());
+                pstmt.setString(4, userdto.getUsername());
+                pstmt.setString(5, userdto.getPassword());
+                pstmt.setString(6, userdto.getCategory());
+                pstmt.setBinaryStream(7, fis, (int) file.length());
+                pstmt.setInt(8, userdto.getId());
                 pstmt.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Updated");
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-    }//end of method editUserDTO
-    
-    public void editFunction(UserDTO userdto, String imgLink, File file){
-        
-        try{
-            if(imgLink.equals("")) {
-                    
-            } else {
-                    String query = "UPDATE users SET fullname=?,location=?,phone=?,username=?,password=?,category=?,image=? WHERE id=?";
-                    FileInputStream fis=new FileInputStream(file);
-                    pstmt = (PreparedStatement) con.prepareStatement(query);
-                    pstmt.setString(1, userdto.getFullName());
-                    pstmt.setString(2, userdto.getLocation());
-                    pstmt.setString(3, userdto.getPhone());
-                    pstmt.setString(4, userdto.getUsername());
-                    pstmt.setString(5, userdto.getPassword());
-                    pstmt.setString(6, userdto.getCategory());
-                    pstmt.setBinaryStream(7, fis,(int)file.length());
-                    pstmt.setInt(8, userdto.getId());
-                    pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Updated");
-            }
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void deleteUserDAO(String value){
-        try{
-            String query="delete from users where username=?";
-            pstmt=con.prepareStatement(query);
-            pstmt.setString(1,value);
+
+    public void deleteUserDAO(String value) {
+        try {
+            String query = "delete from users where username=?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, value);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Deleted..");
-        }catch(SQLException  e){
+        } catch (SQLException e) {
         }
         new Users().loadDatas();
     }
@@ -163,40 +148,39 @@ public class UserDAO {
         return rs;
     }
 
-    public ResultSet getUser(String user){
+    public ResultSet getUser(String user) {
         try {
-            String query = "SELECT * FROM users WHERE username='"+user+"'";
+            String query = "SELECT * FROM users WHERE username='" + user + "'";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
-    
-    public ResultSet getPassword(String user, String pass){
+
+    public ResultSet getPassword(String user, String pass) {
         try {
-            String query = "SELECT password FROM users WHERE username='"+user+"' AND password='"+pass+"'";
+            String query = "SELECT password FROM users WHERE username='" + user + "' AND password='" + pass + "'";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rs;
     }
-    
-    public void changePassword(String user, String pass){
-        try{
-            String query="UPDATE users SET password=? WHERE username=?";
-            pstmt=con.prepareStatement(query);
-            String encPass=new Users().encryptPassword(pass);
+
+    public void changePassword(String user, String pass) {
+        try {
+            String query = "UPDATE users SET password=? WHERE username=?";
+            pstmt = con.prepareStatement(query);
+            String encPass = new Users().encryptPassword(pass);
             pstmt.setString(1, encPass);
             pstmt.setString(2, user);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Updated!");
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-        
 
     //start of method DefaultTableModle
     public DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {

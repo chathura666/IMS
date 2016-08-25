@@ -23,12 +23,11 @@ public class Suppliers extends javax.swing.JPanel {
      */
     public Suppliers() {
         initComponents();
-        supplierCodeTxt.setVisible(false);
+        //supplierCodeTxt.setVisible(false);
         loadDatas();
-//        editBttn.setVisible(false);
-//        editLab.setVisible(false);
-//        deleteBttn.setVisible(false);
-//        deleteLab.setVisible(false); 
+        editBttn.setEnabled(false);
+        deleteBttn.setEnabled(false);
+
     }
 
     /**
@@ -61,6 +60,7 @@ public class Suppliers extends javax.swing.JPanel {
         editLab = new javax.swing.JLabel();
         deleteLab = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        suppliersNameLab1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         searchTxt = new javax.swing.JTextField();
@@ -73,6 +73,7 @@ public class Suppliers extends javax.swing.JPanel {
                 mainPanelMouseClicked(evt);
             }
         });
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,6 +95,8 @@ public class Suppliers extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(table);
+
+        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 733, 415));
 
         inputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PLEASE ENTER ALL THE FIELDS"));
 
@@ -118,11 +121,11 @@ public class Suppliers extends javax.swing.JPanel {
             }
         });
 
-        suppliersNameLab.setText("Supplier's name");
+        suppliersNameLab.setText("Supplier's name:");
 
-        jLabel3.setText("Location");
+        jLabel3.setText("Location:");
 
-        jLabel5.setText("Phone");
+        jLabel5.setText("Phone:");
 
         addBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/addPeople.png"))); // NOI18N
         addBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,6 +170,8 @@ public class Suppliers extends javax.swing.JPanel {
 
         jLabel9.setText("Clear");
 
+        suppliersNameLab1.setText("Supplier Code:");
+
         javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
         inputPanelLayout.setHorizontalGroup(
@@ -174,51 +179,51 @@ public class Suppliers extends javax.swing.JPanel {
             .addGroup(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(suppliersNameLab1)
+                            .addComponent(suppliersNameLab)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(10, 10, 10)
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(phoneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(locationTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(suppliersNameTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(supplierCodeTxt))
+                        .addGap(21, 21, 21))
                     .addGroup(inputPanelLayout.createSequentialGroup()
                         .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addBttn)
                             .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(editLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(editBttn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(deleteBttn)
+                                .addGap(18, 18, 18)
+                                .addComponent(editLab, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(deleteLab)
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(deleteLab, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(clearBttn))
-                        .addContainerGap(100, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(supplierCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(suppliersNameLab)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(phoneTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                                    .addComponent(locationTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(suppliersNameTxt, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addGap(21, 21, 21))))
+                                .addComponent(editBttn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteBttn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clearBttn)
+                                .addContainerGap(100, Short.MAX_VALUE))))))
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inputPanelLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(37, 37, 37)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(supplierCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(suppliersNameLab1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(suppliersNameLab)
                     .addComponent(suppliersNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,35 +235,33 @@ public class Suppliers extends javax.swing.JPanel {
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addComponent(supplierCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addBttn)
-                            .addComponent(editBttn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(editLab)))
                     .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(inputPanelLayout.createSequentialGroup()
-                            .addGap(54, 54, 54)
-                            .addComponent(deleteLab))
+                        .addComponent(addBttn)
+                        .addComponent(editBttn))
+                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(deleteBttn)
-                        .addGroup(inputPanelLayout.createSequentialGroup()
-                            .addComponent(clearBttn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel9))))
-                .addContainerGap(147, Short.MAX_VALUE))
+                        .addComponent(clearBttn)))
+                .addGap(6, 6, 6)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(editLab)
+                        .addComponent(deleteLab)
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel2))
+                .addGap(113, 113, 113))
         );
 
         jTabbedPane1.addTab("SUPPLIERS", inputPanel);
 
+        mainPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 76, -1, 460));
+
         jLabel1.setFont(new java.awt.Font("Comfortaa", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
         jLabel1.setText("SUPPLIERS");
+        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, -1, -1));
+        mainPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 5));
 
         searchTxt.setToolTipText("Search using Full Name Location, Phone OR Supplier Code");
         searchTxt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -271,11 +274,14 @@ public class Suppliers extends javax.swing.JPanel {
                 searchTxtKeyReleased(evt);
             }
         });
+        mainPanel.add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(906, 23, 184, 28));
 
         searchByLab.setText("SEARCH");
+        mainPanel.add(searchByLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(862, 20, -1, 34));
 
         jLabel10.setForeground(new java.awt.Color(102, 102, 255));
         jLabel10.setText("(Search using Full Name, Location, Phone OR Supplier Code)");
+        mainPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(567, 30, -1, -1));
 
         refreshBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/reload.png"))); // NOI18N
         refreshBttn.setText("Refresh");
@@ -284,54 +290,7 @@ public class Suppliers extends javax.swing.JPanel {
                 refreshBttnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchByLab)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(179, 179, 179))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(refreshBttn)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchByLab, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(refreshBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jTabbedPane1))
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
+        mainPanel.add(refreshBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 76, -1, 36));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -397,6 +356,10 @@ public class Suppliers extends javax.swing.JPanel {
         suppliersNameTxt.setText((String) val[1]);
         locationTxt.setText((String) val[2]);
         phoneTxt.setText((String) val[3]);
+
+        editBttn.setEnabled(true);
+        deleteBttn.setEnabled(true);
+        supplierCodeTxt.setEditable(false);
     }//GEN-LAST:event_tableMouseClicked
 
     private void editBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBttnMouseClicked
@@ -422,6 +385,10 @@ public class Suppliers extends javax.swing.JPanel {
         suppliersNameTxt.setText("");
         locationTxt.setText("");
         phoneTxt.setText("");
+
+        editBttn.setEnabled(false);
+        deleteBttn.setEnabled(false);
+        supplierCodeTxt.setEditable(true);
     }//GEN-LAST:event_editBttnMouseClicked
 
     private void deleteBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBttnMouseClicked
@@ -435,6 +402,10 @@ public class Suppliers extends javax.swing.JPanel {
             locationTxt.setText("");
             phoneTxt.setText("");
             loadDatas();
+
+            editBttn.setEnabled(false);
+            deleteBttn.setEnabled(false);
+            supplierCodeTxt.setEditable(true);
         }
 
     }//GEN-LAST:event_deleteBttnMouseClicked
@@ -446,6 +417,7 @@ public class Suppliers extends javax.swing.JPanel {
         } else {
 
             SupplierDTO supplierdto = new SupplierDTO();
+            supplierdto.setSupplierCode(supplierCodeTxt.getText());
             supplierdto.setFullName(suppliersNameTxt.getText());
             supplierdto.setLocation(locationTxt.getText());
             supplierdto.setPhone(phoneTxt.getText());
@@ -456,6 +428,10 @@ public class Suppliers extends javax.swing.JPanel {
             locationTxt.setText("");
             phoneTxt.setText("");
             loadDatas();
+
+            editBttn.setEnabled(false);
+            deleteBttn.setEnabled(false);
+            supplierCodeTxt.setEditable(true);
         }
     }//GEN-LAST:event_addBttnMouseClicked
 
@@ -464,6 +440,10 @@ public class Suppliers extends javax.swing.JPanel {
         suppliersNameTxt.setText("");
         locationTxt.setText("");
         phoneTxt.setText("");
+
+        editBttn.setEnabled(false);
+        deleteBttn.setEnabled(false);
+        supplierCodeTxt.setEditable(true);
     }//GEN-LAST:event_clearBttnMouseClicked
 
     private void refreshBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBttnActionPerformed
@@ -518,6 +498,7 @@ public class Suppliers extends javax.swing.JPanel {
     private javax.swing.JTextField searchTxt;
     private javax.swing.JTextField supplierCodeTxt;
     private javax.swing.JLabel suppliersNameLab;
+    private javax.swing.JLabel suppliersNameLab1;
     private javax.swing.JTextField suppliersNameTxt;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

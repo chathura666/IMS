@@ -31,8 +31,11 @@ public class Users extends javax.swing.JPanel {
 
         initComponents();
 
-        usernameTxt.setEnabled(false);
+        //usernameTxt.setEnabled(false);
         chooser = new JFileChooser();
+        editBttn.setEnabled(false);
+        UserdeleteBttn.setEnabled(false);
+        btnEditDetails.setEnabled(false);
         loadDatas();
     }
 
@@ -67,6 +70,12 @@ public class Users extends javax.swing.JPanel {
         fullNameLab1 = new javax.swing.JLabel();
         usernameTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        fullNameLab2 = new javax.swing.JLabel();
+        passwordTxt = new javax.swing.JTextField();
+        passwordTxt2 = new javax.swing.JTextField();
+        fullNameLab3 = new javax.swing.JLabel();
+        fullNameLab4 = new javax.swing.JLabel();
+        btnEditDetails = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
@@ -75,12 +84,16 @@ public class Users extends javax.swing.JPanel {
                 mainPanelMouseClicked(evt);
             }
         });
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 64, 1080, 10));
 
         jLabel2.setFont(new java.awt.Font("Comfortaa", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 204));
         jLabel2.setText("USERS");
+        mainPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PLEASE FILL ALL THE FIELDS"));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/addPeople.png"))); // NOI18N
         addBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,8 +101,10 @@ public class Users extends javax.swing.JPanel {
                 addBttnMouseClicked(evt);
             }
         });
+        jPanel1.add(addBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 374, -1, -1));
 
         locationLab.setText("Location:");
+        jPanel1.add(locationLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 165, -1, -1));
 
         userComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMINISTRATOR", "NORMAL USER" }));
         userComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -97,16 +112,22 @@ public class Users extends javax.swing.JPanel {
                 userComboBoxActionPerformed(evt);
             }
         });
+        jPanel1.add(userComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 225, 40));
 
         fullNameLab.setText("Full Name: ");
+        jPanel1.add(fullNameLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 127, -1, -1));
 
         phoneTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 206, 225, 27));
 
         locationTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(locationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 159, 225, 27));
 
         fullNameTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 121, 225, 27));
 
         phoneLab.setText("Phone:");
+        jPanel1.add(phoneLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 212, -1, -1));
 
         UserdeleteBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/deletelarge.png"))); // NOI18N
         UserdeleteBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,6 +135,7 @@ public class Users extends javax.swing.JPanel {
                 UserdeleteBttnMouseClicked(evt);
             }
         });
+        jPanel1.add(UserdeleteBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 374, -1, -1));
 
         clearBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/clear.png"))); // NOI18N
         clearBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,12 +143,16 @@ public class Users extends javax.swing.JPanel {
                 clearBttnMouseClicked(evt);
             }
         });
+        jPanel1.add(clearBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 374, -1, -1));
 
         jLabel3.setText("Add");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 428, -1, -1));
 
         jLabel5.setText("Delete");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 428, -1, -1));
 
-        jLabel6.setText("Clear");
+        jLabel6.setText("Cancel");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 428, 38, -1));
 
         editBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/editPeople.png"))); // NOI18N
         editBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,110 +160,44 @@ public class Users extends javax.swing.JPanel {
                 editBttnMouseClicked(evt);
             }
         });
+        jPanel1.add(editBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 374, -1, -1));
 
-        jLabel4.setText("Edit");
+        jLabel4.setText("Update");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 428, -1, -1));
 
-        fullNameLab1.setText("User Name:");
+        fullNameLab1.setText("Username:");
+        jPanel1.add(fullNameLab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 249, -1, -1));
 
         usernameTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 244, 225, 25));
 
         jLabel1.setText("User Type:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 42, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addBttn)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(editBttn)
-                                .addGap(5, 5, 5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(16, 16, 16)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserdeleteBttn)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(clearBttn))
-                        .addGap(116, 116, 116))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fullNameLab)
-                                    .addComponent(phoneLab)
-                                    .addComponent(locationLab)
-                                    .addComponent(fullNameLab1))
-                                .addGap(7, 7, 7)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(locationTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                    .addComponent(fullNameTxt)
-                                    .addComponent(phoneTxt)
-                                    .addComponent(usernameTxt)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(userComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fullNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fullNameLab))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(locationLab))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phoneLab))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fullNameLab1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UserdeleteBttn)
-                            .addComponent(clearBttn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addBttn)
-                            .addComponent(editBttn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
-                .addContainerGap())
-        );
+        fullNameLab2.setText("Password:");
+        jPanel1.add(fullNameLab2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 292, -1, -1));
+
+        passwordTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 287, 225, 25));
+
+        passwordTxt2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel1.add(passwordTxt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 323, 225, 25));
+
+        fullNameLab3.setText("Password:");
+        jPanel1.add(fullNameLab3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 347, -1, 9));
+
+        fullNameLab4.setText("Confirm");
+        jPanel1.add(fullNameLab4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 327, -1, -1));
+
+        btnEditDetails.setText("Edit Details");
+        btnEditDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDetailsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEditDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(762, 80, 328, 460));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -257,36 +217,7 @@ public class Users extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(table);
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 742, 458));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -296,7 +227,9 @@ public class Users extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -327,19 +260,31 @@ public class Users extends javax.swing.JPanel {
         if (fullNameTxt.getText().equals("") || locationTxt.getText().equals("") || phoneTxt.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please fill all the fields!");
         } else {
-            user = (String) userComboBox.getSelectedItem();
-            userdto.setFullName(fullNameTxt.getText());
-            userdto.setLocation(locationTxt.getText());
-            userdto.setPhone(phoneTxt.getText());
-            userdto.setCategory(user);
-            new UserDAO().addUserDAO(userdto, user);
 
-            fullNameTxt.setText("");
-            locationTxt.setText("");
-            phoneTxt.setText("");
-            usernameTxt.setText("");
+            if (passwordTxt.getText().equals(passwordTxt2.getText())) {
+                user = (String) userComboBox.getSelectedItem();
+                userdto.setFullName(fullNameTxt.getText());
+                userdto.setLocation(locationTxt.getText());
+                userdto.setPhone(phoneTxt.getText());
+                userdto.setCategory(user);
+                userdto.setUsername(usernameTxt.getText());
+                userdto.setPassword(passwordTxt.getText());
+                new UserDAO().addUserDAO(userdto, user);
 
-            loadDatas();
+                fullNameTxt.setText("");
+                locationTxt.setText("");
+                phoneTxt.setText("");
+                usernameTxt.setText("");
+                passwordTxt.setText("");
+
+                editBttn.setEnabled(false);
+                UserdeleteBttn.setEnabled(false);
+                btnEditDetails.setEnabled(false);
+
+                loadDatas();
+            } else {
+                JOptionPane.showMessageDialog(null, "passwords do not match!");
+            }
         }
     }//GEN-LAST:event_addBttnMouseClicked
     String username;
@@ -357,6 +302,17 @@ public class Users extends javax.swing.JPanel {
         user = (String) userComboBox.getSelectedItem();
         userComboBox.setSelectedItem(user);
         username = (String) val[3];
+
+        fullNameTxt.setEditable(false);
+        locationTxt.setEditable(false);
+        phoneTxt.setEditable(false);
+        usernameTxt.setEditable(false);
+        passwordTxt.setEditable(false);
+        passwordTxt2.setEditable(false);
+
+        editBttn.setEnabled(true);
+        UserdeleteBttn.setEnabled(true);
+        btnEditDetails.setEnabled(true);
     }//GEN-LAST:event_tableMouseClicked
 
     private void UserdeleteBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserdeleteBttnMouseClicked
@@ -369,6 +325,11 @@ public class Users extends javax.swing.JPanel {
             locationTxt.setText("");
             phoneTxt.setText("");
             usernameTxt.setText("");
+            passwordTxt.setText("");
+
+            editBttn.setEnabled(false);
+            UserdeleteBttn.setEnabled(false);
+            btnEditDetails.setEnabled(false);
             loadDatas();
         }
     }//GEN-LAST:event_UserdeleteBttnMouseClicked
@@ -378,6 +339,18 @@ public class Users extends javax.swing.JPanel {
         fullNameTxt.setText("");
         locationTxt.setText("");
         phoneTxt.setText("");
+        passwordTxt.setText("");
+
+        fullNameTxt.setEditable(true);
+        locationTxt.setEditable(true);
+        phoneTxt.setEditable(true);
+        usernameTxt.setEditable(true);
+        passwordTxt.setEditable(true);
+        passwordTxt2.setEditable(true);
+
+        editBttn.setEnabled(false);
+        UserdeleteBttn.setEnabled(false);
+        btnEditDetails.setEnabled(false);
     }//GEN-LAST:event_clearBttnMouseClicked
     String filename;
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
@@ -385,6 +358,7 @@ public class Users extends javax.swing.JPanel {
         fullNameTxt.setText("");
         locationTxt.setText("");
         phoneTxt.setText("");
+        passwordTxt.setText("");
     }//GEN-LAST:event_mainPanelMouseClicked
 
     private void editBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBttnMouseClicked
@@ -408,10 +382,24 @@ public class Users extends javax.swing.JPanel {
                 locationTxt.setText("");
                 phoneTxt.setText("");
                 usernameTxt.setText("");
+                passwordTxt.setText("");
+
+                editBttn.setEnabled(false);
+                UserdeleteBttn.setEnabled(false);
+                btnEditDetails.setEnabled(false);
                 loadDatas();
             }
         }
     }//GEN-LAST:event_editBttnMouseClicked
+
+    private void btnEditDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetailsActionPerformed
+        fullNameTxt.setEditable(true);
+        locationTxt.setEditable(true);
+        phoneTxt.setEditable(true);
+        //usernameTxt.setEditable(true);
+        //passwordTxt.setEditable(true);
+        //passwordTxt2.setEditable(true);
+    }//GEN-LAST:event_btnEditDetailsActionPerformed
 
     public void loadDatas() {
         try {
@@ -425,10 +413,14 @@ public class Users extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel UserdeleteBttn;
     private javax.swing.JLabel addBttn;
+    private javax.swing.JButton btnEditDetails;
     private javax.swing.JLabel clearBttn;
     private javax.swing.JLabel editBttn;
     private javax.swing.JLabel fullNameLab;
     private javax.swing.JLabel fullNameLab1;
+    private javax.swing.JLabel fullNameLab2;
+    private javax.swing.JLabel fullNameLab3;
+    private javax.swing.JLabel fullNameLab4;
     private javax.swing.JTextField fullNameTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -442,6 +434,8 @@ public class Users extends javax.swing.JPanel {
     private javax.swing.JLabel locationLab;
     private javax.swing.JTextField locationTxt;
     public javax.swing.JPanel mainPanel;
+    private javax.swing.JTextField passwordTxt;
+    private javax.swing.JTextField passwordTxt2;
     private javax.swing.JLabel phoneLab;
     private javax.swing.JTextField phoneTxt;
     private javax.swing.JTable table;

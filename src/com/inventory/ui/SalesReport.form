@@ -30,11 +30,8 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="supplierInfoPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="supplierInfoPanel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
@@ -485,7 +482,7 @@
                           <Component id="supplierInfoLab" min="-2" pref="291" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="120" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

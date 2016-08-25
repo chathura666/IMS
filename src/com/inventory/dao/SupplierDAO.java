@@ -47,52 +47,53 @@ public class SupplierDAO {
                     addFunction(supplierdto);
                 }
         }catch(Exception e){
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
         }            
     }//end of method addSupplierDAO
     
     public void addFunction(SupplierDTO supplierdto){
                 try{
-                    String supplierCode = null;
-                    String oldSupplierCode = null;
-                    String query1="SELECT * FROM suppliers";
-                    rs=stmt.executeQuery(query1);
-                    if(!rs.next()){
-                        supplierCode="sup"+"1"; 
-                    }
-                    else{
-                        String query2="SELECT * FROM suppliers ORDER by sid DESC";
-                        rs=stmt.executeQuery(query2);
-                        if(rs.next()){
-                            oldSupplierCode=rs.getString("suppliercode");
-                            Integer scode=Integer.parseInt(oldSupplierCode.substring(3));
-                            scode++;    
-                            supplierCode="sup"+scode;
-                        }
-                    }
+//                    String supplierCode = null;
+//                    String oldSupplierCode = null;
+//                    String query1="SELECT * FROM suppliers";
+//                    rs=stmt.executeQuery(query1);
+//                    if(!rs.next()){
+//                        supplierCode="sup"+"1"; 
+//                    }
+//                    else{
+//                        String query2="SELECT * FROM suppliers ORDER by sid DESC";
+//                        rs=stmt.executeQuery(query2);
+//                        if(rs.next()){
+//                            oldSupplierCode=rs.getString("suppliercode");
+//                            Integer scode=Integer.parseInt(oldSupplierCode.substring(3));
+//                            scode++;    
+//                            supplierCode="sup"+scode;
+//                        }
+//                    }
                     String q = "INSERT INTO suppliers VALUES(null,?,?,?,?)";
                     pstmt = (PreparedStatement) con.prepareStatement(q);
-                    pstmt.setString(1, supplierCode);
+                    pstmt.setString(1, supplierdto.getSupplierCode());
                     pstmt.setString(2, supplierdto.getFullName());
                     pstmt.setString(3, supplierdto.getLocation());
                     pstmt.setString(4, supplierdto.getPhone());
+                     
                     pstmt.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Inserted Successfully! Now add some products..");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                   JOptionPane.showMessageDialog(null, e.getMessage());
                 }
     }
     
     public void editSupplierDAO(SupplierDTO supplierdto) {
             try {
 
-                String query = "UPDATE suppliers SET suppliercode=?,fullname=?,location=?,phone=? WHERE suppliercode=?";
+                String query = "UPDATE suppliers SET fullname=?,location=?,phone=? WHERE suppliercode=?";
                 pstmt = (PreparedStatement) con.prepareStatement(query);
-                pstmt.setString(1, supplierdto.getSupplierCode());
-                pstmt.setString(2, supplierdto.getFullName());
-                pstmt.setString(3, supplierdto.getLocation());
-                pstmt.setString(4, supplierdto.getPhone());
-                pstmt.setString(5, supplierdto.getSupplierCode());
+
+                pstmt.setString(1, supplierdto.getFullName());
+                pstmt.setString(2, supplierdto.getLocation());
+                pstmt.setString(3, supplierdto.getPhone());
+                pstmt.setString(4, supplierdto.getSupplierCode());
                 pstmt.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Updated Successfully");
             } catch (Exception e) {
@@ -108,7 +109,7 @@ public class SupplierDAO {
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Deleted..");
         }catch(SQLException  e){
-            
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -117,7 +118,7 @@ public class SupplierDAO {
             String query = "SELECT suppliercode AS SupplierCode, fullname AS Name, location as Address, phone AS Phone FROM suppliers ORDER BY sid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return rs;
     }//end of method getQueryResult
@@ -148,7 +149,7 @@ public class SupplierDAO {
             String query = "SELECT suppliercode AS SupplierCode, fullname AS Name, location as Address, phone AS Phone FROM suppliers WHERE fullname LIKE '%"+searchTxt+"%' OR location LIKE '%"+searchTxt+"%' OR suppliercode LIKE '%"+searchTxt+"%' OR phone LIKE '%"+searchTxt+"%'";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return rs;
     }

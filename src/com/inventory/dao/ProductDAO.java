@@ -187,29 +187,30 @@ public class ProductDAO {
 
     public void addFunction(ProductDTO productdto) {
         try {
-            String productCode = null;
-            String oldProductCode = null;
-            String query1 = "SELECT * FROM products";
-            rs = stmt.executeQuery(query1);
-            if (!rs.next()) {
-                productCode = "prod" + "1";
-            } else {
-                String query2 = "SELECT * FROM products ORDER by pid DESC";
-                rs = stmt.executeQuery(query2);
-                if (rs.next()) {
-                    oldProductCode = rs.getString("productcode");
-                    Integer pcode = Integer.parseInt(oldProductCode.substring(4));
-                    pcode++;
-                    productCode = "prod" + pcode;
-                }
-            }
-            String q = "INSERT INTO products VALUES(null,?,?,?,?,?)";
+//            String productCode = null;
+//            String oldProductCode = null;
+//            String query1 = "SELECT * FROM products";
+//            rs = stmt.executeQuery(query1);
+//            if (!rs.next()) {
+//                productCode = "prod" + "1";
+//            } else {
+//                String query2 = "SELECT * FROM products ORDER by pid DESC";
+//                rs = stmt.executeQuery(query2);
+//                if (rs.next()) {
+//                    oldProductCode = rs.getString("productcode");
+//                    Integer pcode = Integer.parseInt(oldProductCode.substring(4));
+//                    pcode++;
+//                    productCode = "prod" + pcode;
+//                }
+//            }
+            String q = "INSERT INTO products VALUES(null,?,?,?,?,?,?)";
             pstmt = (PreparedStatement) con.prepareStatement(q);
-            pstmt.setString(1, productCode);
+            pstmt.setString(1, productdto.getProductCode());
             pstmt.setString(2, productdto.getProductName());
             pstmt.setDouble(3, productdto.getCostPrice());
             pstmt.setDouble(4, productdto.getSellingPrice());
             pstmt.setString(5, productdto.getBrand());
+            pstmt.setString(6, productdto.getDescription());
 
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Inserted Successfully! Now you can purchase the product..");
@@ -237,14 +238,28 @@ public class ProductDAO {
     }
 
     public void editProductDAO(ProductDTO productdto) {
+        int pid = -1;
         try {
-            String query = "UPDATE products SET productname=?,costprice=?,sellingprice=?,brand=? WHERE productcode=?";
+
+            String query1 = "SELECT * FROM products";
+            rs = stmt.executeQuery(query1);
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "No Items");
+            } else {
+                String query2 = "SELECT pid FROM products WHERE productcode='" + productdto.getOldproductCode()+ "'";
+                rs = stmt.executeQuery(query2);
+                if (rs.next()) {
+                    pid = rs.getInt("pid");
+                }
+            }
+            String query = "UPDATE products SET productcode=?, productname=?,costprice=?,sellingprice=?,brand=? WHERE pid=?";
             pstmt = (PreparedStatement) con.prepareStatement(query);
-            pstmt.setString(1, productdto.getProductName());
-            pstmt.setDouble(2, productdto.getCostPrice());
-            pstmt.setDouble(3, productdto.getSellingPrice());
-            pstmt.setString(4, productdto.getBrand());
-            pstmt.setString(5, productdto.getProductCode());
+            pstmt.setString(1, productdto.getProductCode());
+            pstmt.setString(2, productdto.getProductName());
+            pstmt.setDouble(3, productdto.getCostPrice());
+            pstmt.setDouble(4, productdto.getSellingPrice());
+            pstmt.setString(5, productdto.getBrand());
+            pstmt.setInt(6, pid);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Updated Successfully");
         } catch (Exception e) {
@@ -504,7 +519,7 @@ public class ProductDAO {
 
     public ResultSet getQueryResult() {
         try {
-            String query = "SELECT productcode,productname,costprice,sellingprice,brand FROM products ORDER BY pid";
+            String query = "SELECT productcode,productname,costprice,sellingprice,brand,description FROM products ORDER BY pid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -524,7 +539,7 @@ public class ProductDAO {
 
     public ResultSet getGRNResult() {
         try {
-            String query = "SELECT GRNid,poid,suppliercode,productcode,quantity,totalcost FROM grninfo ORDER BY GRNid";
+            String query = "SELECT GRNid,grncode,purchasecode,suppliercode,productcode,quantity,totalcost FROM grninfo ORDER BY GRNid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -554,7 +569,7 @@ public class ProductDAO {
 
     public ResultSet getSearchProductsQueryResult(String searchTxt) {
         try {
-            String query = "SELECT pid,productcode,productname,costprice,sellingprice,brand FROM products WHERE productname LIKE '%" + searchTxt + "%' OR brand LIKE '%" + searchTxt + "%' OR productcode LIKE '%" + searchTxt + "%'";
+            String query = "SELECT productcode,productname,costprice,sellingprice,brand,description FROM products WHERE productname LIKE '%" + searchTxt + "%' OR brand LIKE '%" + searchTxt + "%' OR productcode LIKE '%" + searchTxt + "%'";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -574,7 +589,7 @@ public class ProductDAO {
 
     public ResultSet getSearchGRNQueryResult(String searchTxt) {
         try {
-            String query = "SELECT GRNID,,POID,productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=grninfo.productcode WHERE grninfo.productcode LIKE '%" + searchTxt + "%' OR productname LIKE '%" + searchTxt + "%' ORDER BY grnid";
+            String query = "SELECT GRNID,purchasecode,productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=grninfo.productcode WHERE grninfo.productcode LIKE '%" + searchTxt + "%' OR productname LIKE '%" + searchTxt + "%' ORDER BY grnid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
