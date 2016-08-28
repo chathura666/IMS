@@ -28,10 +28,28 @@ public class ProductDTO {
     private String brand;
     private String description;
     private int userId;
+    private String UserName;
     private String customersName;
+    private String GRNCode;
 
     public String getPurchaseID() {
         return purchaseID;
+    }
+
+    public String getGRNCode() {
+        return GRNCode;
+    }
+
+    public void setGRNCode(String GRNCode) {
+        this.GRNCode = GRNCode;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
     }
 
     public void setPurchaseID(String purchaseID) {

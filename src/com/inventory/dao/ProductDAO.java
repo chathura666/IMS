@@ -15,6 +15,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -203,7 +205,7 @@ public class ProductDAO {
 //                    productCode = "prod" + pcode;
 //                }
 //            }
-            String q = "INSERT INTO products VALUES(null,?,?,?,?,?,?)";
+            String q = "INSERT INTO products VALUES(null,?,?,?,?,?,?,?)";
             pstmt = (PreparedStatement) con.prepareStatement(q);
             pstmt.setString(1, productdto.getProductCode());
             pstmt.setString(2, productdto.getProductName());
@@ -211,6 +213,7 @@ public class ProductDAO {
             pstmt.setDouble(4, productdto.getSellingPrice());
             pstmt.setString(5, productdto.getBrand());
             pstmt.setString(6, productdto.getDescription());
+            pstmt.setString(7, productdto.getUserName());
 
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Inserted Successfully! Now you can purchase the product..");
@@ -222,13 +225,15 @@ public class ProductDAO {
 //    addPurchaseDAO
     public void addPurchaseDAO(ProductDTO productdto) {
         try {
-            String q = "INSERT INTO purchaseinfo VALUES(null,?,?,?,?,?)";
+            String q = "INSERT INTO purchaseinfo VALUES(null,?,?,?,?,?,?,?)";
             pstmt = (PreparedStatement) con.prepareStatement(q);
-            pstmt.setString(1, productdto.getSupplierCode());
-            pstmt.setString(2, productdto.getProductCode());
-            pstmt.setString(3, productdto.getDate());
-            pstmt.setInt(4, productdto.getQuantity());
-            pstmt.setDouble(5, productdto.getTotalCost());
+            pstmt.setString(1, productdto.getPurchaseID());
+            pstmt.setString(2, productdto.getSupplierCode());
+            pstmt.setString(3, productdto.getProductCode() );
+            pstmt.setString(4,productdto.getDate());
+            pstmt.setInt(5,productdto.getQuantity());
+            pstmt.setDouble(6, productdto.getTotalCost());
+            pstmt.setString(7, productdto.getUserName());
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Inserted Successfully");
         } catch (Exception e) {
@@ -252,14 +257,15 @@ public class ProductDAO {
                     pid = rs.getInt("pid");
                 }
             }
-            String query = "UPDATE products SET productcode=?, productname=?,costprice=?,sellingprice=?,brand=? WHERE pid=?";
+            String query = "UPDATE products SET productcode=?, productname=?,costprice=?,sellingprice=?,brand=? ,description=? WHERE pid=?";
             pstmt = (PreparedStatement) con.prepareStatement(query);
             pstmt.setString(1, productdto.getProductCode());
             pstmt.setString(2, productdto.getProductName());
             pstmt.setDouble(3, productdto.getCostPrice());
             pstmt.setDouble(4, productdto.getSellingPrice());
             pstmt.setString(5, productdto.getBrand());
-            pstmt.setInt(6, pid);
+            pstmt.setString(6, productdto.getDescription());
+            pstmt.setInt(7, pid);
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Updated Successfully");
         } catch (Exception e) {
@@ -344,15 +350,28 @@ public class ProductDAO {
      }
      */
     public void addGRNDAO(ProductDTO productdto) {
+        
+         String query = "SELECT * FROM ims.purchaseinfo p WHERE p.purchaseid='"+productdto.getGRNCode()+"'";
+         String Supcode = null;   
         try {
-            String q = "INSERT INTO grninfo VALUES(null,?,?,?,?,?,?)";
+            rs = stmt.executeQuery(query);
+             if (rs.next()) {
+                Supcode = rs.getString("suppliercode");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+        try {
+            String q = "INSERT INTO grninfo VALUES(null,?,?,?,?,?,?,?)";
             pstmt = (PreparedStatement) con.prepareStatement(q);
-            pstmt.setString(1, Integer.toString(productdto.getPoid()));
-            pstmt.setString(2, productdto.getSupplierCode());
+            pstmt.setString(1, productdto.getGRNCode());
+            pstmt.setString(2, Supcode);
             pstmt.setString(3, productdto.getProductCode());
             pstmt.setString(4, productdto.getDate());
             pstmt.setInt(5, productdto.getQuantity());
             pstmt.setDouble(6, productdto.getTotalCost());
+            pstmt.setString(7, productdto.getUserName());
             pstmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Inserted Successfully");
         } catch (Exception e) {
@@ -539,7 +558,7 @@ public class ProductDAO {
 
     public ResultSet getGRNResult() {
         try {
-            String query = "SELECT GRNid,grncode,purchasecode,suppliercode,productcode,quantity,totalcost FROM grninfo ORDER BY GRNid";
+            String query = "SELECT grncode,suppliercode,productcode,quantity,totalcost FROM grninfo ORDER BY GRNid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -579,7 +598,7 @@ public class ProductDAO {
 
     public ResultSet getSearchPurchaseQueryResult(String searchTxt) {
         try {
-            String query = "SELECT purchaseid,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode WHERE purchaseinfo.productcode LIKE '%" + searchTxt + "%' OR productname LIKE '%" + searchTxt + "%' ORDER BY purchaseid";
+            String query = "SELECT purchaseid,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode WHERE purchaseinfo.purchaseid LIKE '%" + searchTxt + "%' ORDER BY products.pid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -589,7 +608,7 @@ public class ProductDAO {
 
     public ResultSet getSearchGRNQueryResult(String searchTxt) {
         try {
-            String query = "SELECT GRNID,purchasecode,productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=grninfo.productcode WHERE grninfo.productcode LIKE '%" + searchTxt + "%' OR productname LIKE '%" + searchTxt + "%' ORDER BY grnid";
+            String query = "SELECT GRNID,purchasecode,productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=grninfo.productcode WHERE grninfo.productcode LIKE '%" + searchTxt + "%' ORDER BY grnid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -627,10 +646,10 @@ public class ProductDAO {
         return rs;
     }
 
-    public String getProductsSupplier(int id) {
+    public String getProductsSupplier(String id) {
         String sup = null;
         try {
-            String query = "SELECT fullname FROM suppliers INNER JOIN purchaseinfo ON suppliers.suppliercode=purchaseinfo.suppliercode WHERE purchaseid=" + id;
+            String query = "SELECT fullname FROM suppliers INNER JOIN purchaseinfo ON suppliers.suppliercode=purchaseinfo.suppliercode WHERE purchaseid='"+ id+"'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 sup = rs.getString("fullname");
@@ -684,7 +703,7 @@ public class ProductDAO {
         return p;
     }
 
-    public String getOrderdDate(int pur) {
+    public String getOrderdDate(String pur) {
         String p = null;
         try {
             String query = "SELECT date FROM purchaseinfo WHERE purchaseid='" + pur + "'";

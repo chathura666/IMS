@@ -21,10 +21,12 @@ public class ChangeDetails extends javax.swing.JPanel {
      * Creates new form ChangeDetails
      */
     String user;
+    String userRole;
 
-    public ChangeDetails(String userSelect) {
+    public ChangeDetails(String userSelect, String role) {
         initComponents();
         user = userSelect;
+        this.userRole = role;
         fullNameTxt.setEnabled(false);
         locationTxt.setEnabled(false);
         phoneTxt.setEnabled(false);
@@ -298,8 +300,16 @@ public class ChangeDetails extends javax.swing.JPanel {
 
 
     private void editProfileBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfileBttnActionPerformed
-        passwordTxt.setEnabled(true);
-        newPasswordTxt.setEnabled(true);
+        if (!userRole.equalsIgnoreCase("CLERK") || userRole.equalsIgnoreCase("STOCK MANAGER")) {
+            passwordTxt.setEnabled(true);
+            newPasswordTxt.setEnabled(true);
+            fullNameTxt.setEnabled(true);
+            locationTxt.setEnabled(true);
+            phoneTxt.setEnabled(true);
+            usernameTxt.setEnabled(true);
+            categoryTxt.setEnabled(true);
+        }
+
     }//GEN-LAST:event_editProfileBttnActionPerformed
 
     private void clearBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBttnMouseClicked

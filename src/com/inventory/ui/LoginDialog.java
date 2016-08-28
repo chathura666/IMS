@@ -48,7 +48,7 @@ public class LoginDialog extends javax.swing.JDialog {
         setTitle("Login");
         setResizable(false);
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMINISTRATOR", "NORMAL USER" }));
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADMINISTRATOR", "STOCK MANAGER", "CLERK" }));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/loginMember.png"))); // NOI18N
 

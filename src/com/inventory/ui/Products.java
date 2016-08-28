@@ -23,6 +23,7 @@ public class Products extends javax.swing.JPanel {
      */
     ProductDTO productdto;
     String username;
+    String userRole;
     String supplier;
     int userId;
     private String oldpcode;
@@ -31,9 +32,11 @@ public class Products extends javax.swing.JPanel {
 //        suppliersName();    
     }
 
-    public Products(String user) {
+    public Products(String user, String role) {
         initComponents();
         username = user;
+        this.userRole = role;
+        System.out.println("Product User Role" + userRole);
         editBttn.setEnabled(false);
         deleteBttn.setEnabled(false);
         //productCodeTxt.setVisible(false);
@@ -81,6 +84,10 @@ public class Products extends javax.swing.JPanel {
         refreshBttn = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        productsPanel.setMaximumSize(new java.awt.Dimension(1080, 541));
+        productsPanel.setPreferredSize(new java.awt.Dimension(1070, 531));
         productsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productsPanelMouseClicked(evt);
@@ -215,12 +222,12 @@ public class Products extends javax.swing.JPanel {
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabel8))
                             .addComponent(clearBttn))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(productNameLab1))
@@ -257,7 +264,7 @@ public class Products extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(jLabel7)))
-                .addGap(25, 25, 25))
+                .addGap(28, 28, 28))
         );
 
         jTabbedPane1.addTab("PRODUCTS", jPanel1);
@@ -278,6 +285,7 @@ public class Products extends javax.swing.JPanel {
             }
         });
 
+        searchByLab.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         searchByLab.setText("SEARCH");
 
         refreshBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/reload.png"))); // NOI18N
@@ -289,6 +297,7 @@ public class Products extends javax.swing.JPanel {
         });
 
         jLabel9.setForeground(new java.awt.Color(102, 102, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("(Search using Product Name,Brand Name, OR Product Code)");
 
         javax.swing.GroupLayout productsPanelLayout = new javax.swing.GroupLayout(productsPanel);
@@ -297,64 +306,50 @@ public class Products extends javax.swing.JPanel {
             productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productsPanelLayout.createSequentialGroup()
                 .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(productsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1))
                     .addGroup(productsPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(productsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(339, 339, 339)
-                                .addComponent(jLabel9)
-                                .addGap(6, 6, 6)
-                                .addComponent(searchByLab)
-                                .addGap(10, 10, 10)
-                                .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(productsPanelLayout.createSequentialGroup()
-                                .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(refreshBttn)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(refreshBttn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTabbedPane1)))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addComponent(searchByLab, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         productsPanelLayout.setVerticalGroup(
             productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(productsPanelLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(productsPanelLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel9))
-                    .addGroup(productsPanelLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(searchByLab, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(productsPanelLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(productsPanelLayout.createSequentialGroup()
-                        .addComponent(refreshBttn)
-                        .addGap(6, 6, 6)
+                        .addGroup(productsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(refreshBttn)
+                            .addComponent(jLabel9)
+                            .addComponent(searchByLab)
+                            .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1)))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(productsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(productsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(productsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 570));
     }// </editor-fold>//GEN-END:initComponents
 
     private void productsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productsPanelMouseClicked
@@ -395,6 +390,7 @@ public class Products extends javax.swing.JPanel {
     }//GEN-LAST:event_clearBttnMouseClicked
 
     private void deleteBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBttnMouseClicked
+        if (!userRole.equalsIgnoreCase("CLERK")) {
         if (table.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Select a table data first!");
         } else {
@@ -411,45 +407,49 @@ public class Products extends javax.swing.JPanel {
             deleteBttn.setEnabled(false);
             loadDatas();
         }
+        }
     }//GEN-LAST:event_deleteBttnMouseClicked
 
     private void editBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBttnMouseClicked
-        if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Select a table data first!");
-        } else {
-            productdto = new ProductDTO();
-            if (productNameTxt.getText().equals("") || costPriceTxt.getText().equals("") || sellingPriceTxt.getText().equals("") || brandTxt.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+        if (!userRole.equalsIgnoreCase("CLERK")) {
+            if (table.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Select a table data first!");
             } else {
-                productdto.setOldproductCode(oldpcode);
-                productdto.setProductCode(productCodeTxt.getText());
-                productdto.setProductName(productNameTxt.getText());
-                productdto.setCostPrice(Double.parseDouble(costPriceTxt.getText()));
-                productdto.setSellingPrice(Double.parseDouble(sellingPriceTxt.getText()));
-                productdto.setBrand((brandTxt.getText()));
-                productdto.setUserId(userId);
-                new ProductDAO().editProductDAO(productdto);
+                productdto = new ProductDTO();
+                if (productNameTxt.getText().equals("") || costPriceTxt.getText().equals("") || sellingPriceTxt.getText().equals("") || brandTxt.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+                } else {
+                    productdto.setOldproductCode(oldpcode);
+                    productdto.setProductCode(productCodeTxt.getText());
+                    productdto.setProductName(productNameTxt.getText());
+                    productdto.setCostPrice(Double.parseDouble(costPriceTxt.getText()));
+                    productdto.setSellingPrice(Double.parseDouble(sellingPriceTxt.getText()));
+                    productdto.setBrand((brandTxt.getText()));
+                    productdto.setUserId(userId);
+                    productdto.setDescription(descriptionTxt.getText());
+                    new ProductDAO().editProductDAO(productdto);
 
-                /*
-                 if(productCode.equals(productCodeTxt.getText())){
-                 new ProductDAO().editStock1(productdto,quantity,productCode);
-                 }else{
-                 new ProductDAO().editStock2(productdto,quantity,productCode);
-                 }
-                 new ProductDAO().editProductDAO(productdto);
-                 */
+                    /*
+                     if(productCode.equals(productCodeTxt.getText())){
+                     new ProductDAO().editStock1(productdto,quantity,productCode);
+                     }else{
+                     new ProductDAO().editStock2(productdto,quantity,productCode);
+                     }
+                     new ProductDAO().editProductDAO(productdto);
+                     */
+                }
+
+                productCodeTxt.setText("");
+                productNameTxt.setText("");
+                costPriceTxt.setText("");
+                sellingPriceTxt.setText("");
+                brandTxt.setText("");
+                descriptionTxt.setText("");
+
+                editBttn.setEnabled(false);
+                deleteBttn.setEnabled(false);
+                loadDatas();
             }
-
-            productCodeTxt.setText("");
-            productNameTxt.setText("");
-            costPriceTxt.setText("");
-            sellingPriceTxt.setText("");
-            brandTxt.setText("");
-            descriptionTxt.setText("");
-
-            editBttn.setEnabled(false);
-            deleteBttn.setEnabled(false);
-            loadDatas();
         }
     }//GEN-LAST:event_editBttnMouseClicked
 
@@ -466,6 +466,7 @@ public class Products extends javax.swing.JPanel {
             productdto.setSellingPrice(Double.parseDouble(sellingPriceTxt.getText()));
             productdto.setBrand((brandTxt.getText()));
             productdto.setUserId(userId);
+            productdto.setUserName(username);
             productdto.setDescription(descriptionTxt.getText());
             new ProductDAO().addProductDAO(productdto);
 
@@ -499,8 +500,10 @@ public class Products extends javax.swing.JPanel {
         productCode = val[1].toString();
         descriptionTxt.setText(val[5].toString());
 
-        editBttn.setEnabled(true);
-        deleteBttn.setEnabled(true);
+        if (!userRole.equalsIgnoreCase("CLERK")) {
+            editBttn.setEnabled(true);
+            deleteBttn.setEnabled(true);
+        }
 
     }//GEN-LAST:event_tableMouseClicked
 

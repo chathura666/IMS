@@ -18,13 +18,19 @@ import javax.swing.JOptionPane;
  */
 public class Suppliers extends javax.swing.JPanel {
 
+    private String userRole;
+
     /**
      * Creates new form Suppliers
      */
-    public Suppliers() {
+    public Suppliers(String role) {
         initComponents();
+        //mainPanel.setLayout(null);
+        //lblHeader.setLocation(200, 10);
         //supplierCodeTxt.setVisible(false);
         loadDatas();
+        this.userRole = role;
+        System.out.println("Suppliers role" + userRole);
         editBttn.setEnabled(false);
         deleteBttn.setEnabled(false);
 
@@ -61,7 +67,7 @@ public class Suppliers extends javax.swing.JPanel {
         deleteLab = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         suppliersNameLab1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblHeader = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         searchTxt = new javax.swing.JTextField();
         searchByLab = new javax.swing.JLabel();
@@ -73,7 +79,6 @@ public class Suppliers extends javax.swing.JPanel {
                 mainPanelMouseClicked(evt);
             }
         });
-        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,9 +101,8 @@ public class Suppliers extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(table);
 
-        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 733, 415));
-
         inputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PLEASE ENTER ALL THE FIELDS"));
+        inputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         suppliersNameTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         suppliersNameTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +110,7 @@ public class Suppliers extends javax.swing.JPanel {
                 suppliersNameTxtActionPerformed(evt);
             }
         });
+        inputPanel.add(suppliersNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 98, 168, 32));
 
         phoneTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         phoneTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +118,7 @@ public class Suppliers extends javax.swing.JPanel {
                 phoneTxtActionPerformed(evt);
             }
         });
+        inputPanel.add(phoneTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 174, 168, 32));
 
         locationTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         locationTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -120,12 +126,16 @@ public class Suppliers extends javax.swing.JPanel {
                 locationTxtActionPerformed(evt);
             }
         });
+        inputPanel.add(locationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 136, 168, 32));
 
         suppliersNameLab.setText("Supplier's name:");
+        inputPanel.add(suppliersNameLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 107, -1, -1));
 
         jLabel3.setText("Location:");
+        inputPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 145, -1, -1));
 
         jLabel5.setText("Phone:");
+        inputPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 183, -1, -1));
 
         addBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/addPeople.png"))); // NOI18N
         addBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,20 +143,25 @@ public class Suppliers extends javax.swing.JPanel {
                 addBttnMouseClicked(evt);
             }
         });
+        inputPanel.add(addBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 241, -1, -1));
 
         editBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/editPeople.png"))); // NOI18N
+        editBttn.setEnabled(false);
         editBttn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editBttnMouseClicked(evt);
             }
         });
+        inputPanel.add(editBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 241, -1, -1));
 
         deleteBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/deletelarge.png"))); // NOI18N
+        deleteBttn.setEnabled(false);
         deleteBttn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteBttnMouseClicked(evt);
             }
         });
+        inputPanel.add(deleteBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 241, -1, -1));
 
         clearBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/clear.png"))); // NOI18N
         clearBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,6 +169,7 @@ public class Suppliers extends javax.swing.JPanel {
                 clearBttnMouseClicked(evt);
             }
         });
+        inputPanel.add(clearBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 241, -1, -1));
 
         supplierCodeTxt.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         supplierCodeTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -161,107 +177,28 @@ public class Suppliers extends javax.swing.JPanel {
                 supplierCodeTxtActionPerformed(evt);
             }
         });
+        inputPanel.add(supplierCodeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 53, 168, 34));
 
         jLabel2.setText("Add");
+        inputPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 295, -1, -1));
 
         editLab.setText("Edit");
+        inputPanel.add(editLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 295, 30, -1));
 
         deleteLab.setText("Delete");
+        inputPanel.add(deleteLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 295, -1, -1));
 
         jLabel9.setText("Clear");
+        inputPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 295, 38, -1));
 
         suppliersNameLab1.setText("Supplier Code:");
-
-        javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
-        inputPanel.setLayout(inputPanelLayout);
-        inputPanelLayout.setHorizontalGroup(
-            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(suppliersNameLab1)
-                            .addComponent(suppliersNameLab)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
-                        .addGap(10, 10, 10)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(phoneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                            .addComponent(locationTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(suppliersNameTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(supplierCodeTxt))
-                        .addGap(21, 21, 21))
-                    .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addBttn)
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(editLab, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteLab)
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addComponent(editBttn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteBttn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clearBttn)
-                                .addContainerGap(100, Short.MAX_VALUE))))))
-        );
-        inputPanelLayout.setVerticalGroup(
-            inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inputPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(supplierCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(suppliersNameLab1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(suppliersNameLab)
-                    .addComponent(suppliersNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(35, 35, 35)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(addBttn)
-                        .addComponent(editBttn))
-                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(deleteBttn)
-                        .addComponent(clearBttn)))
-                .addGap(6, 6, 6)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(editLab)
-                        .addComponent(deleteLab)
-                        .addComponent(jLabel9))
-                    .addComponent(jLabel2))
-                .addGap(113, 113, 113))
-        );
+        inputPanel.add(suppliersNameLab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, -1, -1));
 
         jTabbedPane1.addTab("SUPPLIERS", inputPanel);
 
-        mainPanel.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 76, -1, 460));
-
-        jLabel1.setFont(new java.awt.Font("Comfortaa", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel1.setText("SUPPLIERS");
-        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, -1, -1));
-        mainPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 5));
+        lblHeader.setFont(new java.awt.Font("Comfortaa", 1, 36)); // NOI18N
+        lblHeader.setForeground(new java.awt.Color(0, 102, 204));
+        lblHeader.setText("SUPPLIERS");
 
         searchTxt.setToolTipText("Search using Full Name Location, Phone OR Supplier Code");
         searchTxt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -274,14 +211,13 @@ public class Suppliers extends javax.swing.JPanel {
                 searchTxtKeyReleased(evt);
             }
         });
-        mainPanel.add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(906, 23, 184, 28));
 
+        searchByLab.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         searchByLab.setText("SEARCH");
-        mainPanel.add(searchByLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(862, 20, -1, 34));
 
         jLabel10.setForeground(new java.awt.Color(102, 102, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("(Search using Full Name, Location, Phone OR Supplier Code)");
-        mainPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(567, 30, -1, -1));
 
         refreshBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/inventory/ui/images/reload.png"))); // NOI18N
         refreshBttn.setText("Refresh");
@@ -290,7 +226,54 @@ public class Suppliers extends javax.swing.JPanel {
                 refreshBttnActionPerformed(evt);
             }
         });
-        mainPanel.add(refreshBttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 76, -1, 36));
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblHeader)
+                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(mainPanelLayout.createSequentialGroup()
+                                    .addComponent(refreshBttn)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(searchByLab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(12, 12, 12))
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(refreshBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchByLab)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -302,7 +285,9 @@ public class Suppliers extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -357,57 +342,66 @@ public class Suppliers extends javax.swing.JPanel {
         locationTxt.setText((String) val[2]);
         phoneTxt.setText((String) val[3]);
 
-        editBttn.setEnabled(true);
-        deleteBttn.setEnabled(true);
-        supplierCodeTxt.setEditable(false);
+        if (!userRole.equalsIgnoreCase("CLERK")) {
+            editBttn.setEnabled(true);
+            deleteBttn.setEnabled(true);
+            supplierCodeTxt.setEditable(false);
+        }
+
     }//GEN-LAST:event_tableMouseClicked
 
     private void editBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBttnMouseClicked
-        if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Select a table data first!");
-        } else {
-            if (suppliersNameTxt.getText().equals("") || locationTxt.getText().equals("") || phoneTxt.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+        if (!userRole.equalsIgnoreCase("CLERK")) {
+            if (table.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Select a table data first!");
             } else {
+                if (suppliersNameTxt.getText().equals("") || locationTxt.getText().equals("") || phoneTxt.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please fill all the fields!");
+                } else {
 
-                SupplierDTO supplierdto = new SupplierDTO();
-                supplierdto.setSupplierCode(supplierCodeTxt.getText());
-                supplierdto.setFullName(suppliersNameTxt.getText());
-                supplierdto.setLocation(locationTxt.getText());
-                supplierdto.setPhone(phoneTxt.getText());
-                new SupplierDAO().editSupplierDAO(supplierdto);
-                loadDatas();
-                //table.getColumn("sid").setMaxWidth(0);
+                    SupplierDTO supplierdto = new SupplierDTO();
+                    supplierdto.setSupplierCode(supplierCodeTxt.getText());
+                    supplierdto.setFullName(suppliersNameTxt.getText());
+                    supplierdto.setLocation(locationTxt.getText());
+                    supplierdto.setPhone(phoneTxt.getText());
+                    new SupplierDAO().editSupplierDAO(supplierdto);
+                    loadDatas();
+                    //table.getColumn("sid").setMaxWidth(0);
+                }
             }
-        }
-
-        supplierCodeTxt.setText("");
-        suppliersNameTxt.setText("");
-        locationTxt.setText("");
-        phoneTxt.setText("");
-
-        editBttn.setEnabled(false);
-        deleteBttn.setEnabled(false);
-        supplierCodeTxt.setEditable(true);
-    }//GEN-LAST:event_editBttnMouseClicked
-
-    private void deleteBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBttnMouseClicked
-        if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Select a table data first!");
-        } else {
-            new SupplierDAO().deleteSupplierDAO(table.getValueAt(table.getSelectedRow(), 0).toString());
 
             supplierCodeTxt.setText("");
             suppliersNameTxt.setText("");
             locationTxt.setText("");
             phoneTxt.setText("");
-            loadDatas();
 
-            editBttn.setEnabled(false);
-            deleteBttn.setEnabled(false);
-            supplierCodeTxt.setEditable(true);
+            if (!userRole.equalsIgnoreCase("CLERK")) {
+                editBttn.setEnabled(false);
+                deleteBttn.setEnabled(false);
+                supplierCodeTxt.setEditable(true);
+            }
         }
 
+    }//GEN-LAST:event_editBttnMouseClicked
+
+    private void deleteBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBttnMouseClicked
+        if (!userRole.equalsIgnoreCase("CLERK")) {
+            if (table.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Select a table data first!");
+            } else {
+                new SupplierDAO().deleteSupplierDAO(table.getValueAt(table.getSelectedRow(), 0).toString());
+
+                supplierCodeTxt.setText("");
+                suppliersNameTxt.setText("");
+                locationTxt.setText("");
+                phoneTxt.setText("");
+                loadDatas();
+
+                editBttn.setEnabled(false);
+                deleteBttn.setEnabled(false);
+                supplierCodeTxt.setEditable(true);
+            }
+        }
     }//GEN-LAST:event_deleteBttnMouseClicked
 
     private void addBttnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBttnMouseClicked
@@ -480,7 +474,6 @@ public class Suppliers extends javax.swing.JPanel {
     private javax.swing.JLabel editBttn;
     private javax.swing.JLabel editLab;
     private javax.swing.JPanel inputPanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -489,6 +482,7 @@ public class Suppliers extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblHeader;
     private javax.swing.JTextField locationTxt;
     public javax.swing.JPanel mainPanel;
     private javax.swing.JTextField phoneTxt;

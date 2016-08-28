@@ -61,7 +61,7 @@ public class ConnectionFactory {
                 e.printStackTrace();
             }
         }else{
-            String query="SELECT * FROM users WHERE username='"+username+"' AND password='"+password+"'AND category='NORMAL USER'";
+            String query="SELECT * FROM users WHERE username='"+username+"' AND password='"+password+"'AND category='"+user+"'";
             try{
                 rs=stmt.executeQuery(query);
                 while(rs.next()){
