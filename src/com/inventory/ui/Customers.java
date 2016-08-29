@@ -27,7 +27,7 @@ public class Customers extends javax.swing.JPanel {
         loadDatas();
         this.userRole = role;
         //    table.getColumn("customercode").setMaxWidth(0);
-        customerCodeTxt.setEnabled(false);
+        //customerCodeTxt.setEnabled(false);
     }
 
     /**
@@ -75,12 +75,13 @@ public class Customers extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("(Search using Full Name, Location, Phone OR Customer Code)");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 72, 367, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 72, 360, -1));
 
+        searchByLab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         searchByLab.setText("SEARCH");
-        add(searchByLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(512, 69, 52, 20));
+        add(searchByLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 69, 60, 20));
 
         searchTxt.setToolTipText("Search using Full Name Location, Phone OR Customer Code");
         searchTxt.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -186,12 +187,13 @@ public class Customers extends javax.swing.JPanel {
                     .addGroup(inputPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)))
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(customerCodeTxt)
-                    .addComponent(locationTxt)
-                    .addComponent(customersNameTxt)
-                    .addComponent(phoneTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                .addGap(10, 10, 10)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customersNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerCodeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
             .addGroup(inputPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -254,13 +256,18 @@ public class Customers extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("CUSTOMERS", inputPanel);
 
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, 360));
+        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 330, 360));
 
         jLabel1.setFont(new java.awt.Font("Comfortaa", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
         jLabel1.setText("CUSTOMERS");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 240, -1));
 
+        table = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -309,6 +316,7 @@ public class Customers extends javax.swing.JPanel {
         } else {
 
             CustomerDTO customerdto = new CustomerDTO();
+            customerdto.setCustomerCode(customerCodeTxt.getText());
             customerdto.setFullName(customersNameTxt.getText());
             customerdto.setLocation(locationTxt.getText());
             customerdto.setPhone(phoneTxt.getText());

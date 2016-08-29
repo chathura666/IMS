@@ -300,6 +300,11 @@ public class Users extends javax.swing.JPanel {
                     .addComponent(jLabel6)))
         );
 
+        table = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;   //Disallow the editing of any cell
+            }
+        };
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

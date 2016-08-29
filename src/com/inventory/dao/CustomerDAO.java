@@ -53,26 +53,10 @@ public class CustomerDAO {
      
      public void addFunction(CustomerDTO customerdto){
          try {
-                        String customerCode = null;
-                        String oldCustomerCode = null;
-                        String query1="SELECT * FROM customers";
-                        rs=stmt.executeQuery(query1);
-                        if(!rs.next()){
-                            customerCode="cus"+"1"; 
-                        }
-                        else{
-                            String query2="SELECT * FROM customers ORDER by cid DESC";
-                            rs=stmt.executeQuery(query2);
-                            if(rs.next()){
-                                oldCustomerCode=rs.getString("customercode");
-                                Integer scode=Integer.parseInt(oldCustomerCode.substring(3));
-                                scode++;    
-                                customerCode="cus"+scode;
-                            }
-                        }
+                        
                             String q = "INSERT INTO customers VALUES(null,?,?,?,?)";
                             pstmt = (PreparedStatement) con.prepareStatement(q);
-                            pstmt.setString(1, customerCode);
+                            pstmt.setString(1, customerdto.getCustomerCode());
                             pstmt.setString(2, customerdto.getFullName());
                             pstmt.setString(3, customerdto.getLocation());
                             pstmt.setString(4, customerdto.getPhone());

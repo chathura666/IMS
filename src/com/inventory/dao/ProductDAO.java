@@ -86,7 +86,7 @@ public class ProductDAO {
     public Double getProductCostPrice(String productCodeTxt) {
         Double costPrice = null;
         try {
-            String query = "SELECT costprice FROM products WHERE productcode='" + productCodeTxt + "'";
+            String query = "SELECT costprice FROM products WHERE productname='" + productCodeTxt + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 costPrice = rs.getDouble("costprice");
@@ -351,7 +351,7 @@ public class ProductDAO {
      */
     public void addGRNDAO(ProductDTO productdto) {
         
-         String query = "SELECT * FROM ims.purchaseinfo p WHERE p.purchaseid='"+productdto.getGRNCode()+"'";
+         String query = "SELECT * FROM ims.purchaseinfo p WHERE p.purchasecode='"+productdto.getGRNCode()+"'";
          String Supcode = null;   
         try {
             rs = stmt.executeQuery(query);
@@ -441,7 +441,7 @@ public class ProductDAO {
     public void deleteStock() {
         try {
             String q = "DELETE FROM currentstocks WHERE productcode NOT IN(SELECT productcode FROM grninfo)";
-            String q1 = "DELETE FROM salesreport WHERE productcode NOT IN(SELECT productcode FROM products)";
+            String q1 = "DELETE FROM issues WHERE productcode NOT IN(SELECT productcode FROM products)";
             stmt.executeUpdate(q);
             stmt.executeUpdate(q1);
         } catch (Exception e) {
@@ -464,7 +464,7 @@ public class ProductDAO {
 
     public void deletePurchaseDAO(String value) {
         try {
-            String query = "delete from purchaseinfo where purchaseid=?";
+            String query = "delete from purchaseinfo where purchasecode=?";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, value);
             pstmt.executeUpdate();
@@ -490,7 +490,7 @@ public class ProductDAO {
 
     public void deleteSalesDAO(String value) {
         try {
-            String query = "delete from salesreport where salesid=?";
+            String query = "delete from issues where salesid=?";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, value);
             pstmt.executeUpdate();
@@ -523,7 +523,7 @@ public class ProductDAO {
             } else {
                 try {
                     String q = "UPDATE currentstocks SET quantity=quantity-'" + productDTO.getQuantity() + "' WHERE productcode='" + productDTO.getProductCode() + "'";
-                    String qry = "INSERT INTO salesreport(date,productcode,customercode,quantity,revenue,soldby) VALUES('" + sellDate + "','" + productCode + "','" + customersCode + "','" + qty + "','" + totalRevenue + "','" + username + "')";
+                    String qry = "INSERT INTO issues(date,productcode,customercode,quantity,revenue,soldby) VALUES('" + sellDate + "','" + productCode + "','" + customersCode + "','" + qty + "','" + totalRevenue + "','" + username + "')";
                     stmt.executeUpdate(q);
                     stmt.executeUpdate(qry);
                     JOptionPane.showMessageDialog(null, "SUCCESSFULLY SOLD");
@@ -548,7 +548,7 @@ public class ProductDAO {
 
     public ResultSet getPurchaseResult() {
         try {
-            String query = "SELECT purchaseid,suppliercode,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode ORDER BY purchaseid";
+            String query = "SELECT purchasecode,suppliercode,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode ORDER BY poid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -558,7 +558,7 @@ public class ProductDAO {
 
     public ResultSet getGRNResult() {
         try {
-            String query = "SELECT grncode,suppliercode,productcode,quantity,totalcost FROM grninfo ORDER BY GRNid";
+            String query = "SELECT grninfo.grncode,grninfo.suppliercode,grninfo.productcode,productname,grninfo.quantity,grninfo.totalcost FROM grninfo INNER JOIN products ON products.productcode=grninfo.productcode ORDER BY GRNid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -578,7 +578,7 @@ public class ProductDAO {
 
     public ResultSet getSalesReportQueryResult() {
         try {
-            String query = "SELECT salesid,salesreport.productcode,productname,salesreport.quantity,revenue,soldby FROM salesreport INNER JOIN products ON salesreport.productcode=products.productcode";
+            String query = "SELECT salesid,issues.productcode,productname,issues.quantity,revenue,soldby FROM issues INNER JOIN products ON issues.productcode=products.productcode";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -598,7 +598,7 @@ public class ProductDAO {
 
     public ResultSet getSearchPurchaseQueryResult(String searchTxt) {
         try {
-            String query = "SELECT purchaseid,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode WHERE purchaseinfo.purchaseid LIKE '%" + searchTxt + "%' ORDER BY products.pid";
+            String query = "SELECT purchasecode,suppliercode,purchaseinfo.productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=purchaseinfo.productcode WHERE purchaseinfo.purchasecode LIKE '%" + searchTxt + "%' ORDER BY products.pid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -608,7 +608,7 @@ public class ProductDAO {
 
     public ResultSet getSearchGRNQueryResult(String searchTxt) {
         try {
-            String query = "SELECT GRNID,purchasecode,productcode,productname,quantity,totalcost FROM purchaseinfo INNER JOIN products ON products.productcode=grninfo.productcode WHERE grninfo.productcode LIKE '%" + searchTxt + "%' ORDER BY grnid";
+            String query = "SELECT grninfo.GRNcode,grninfo.suppliercode,grninfo.productcode,products.productname,grninfo.quantity,grninfo.totalcost FROM grninfo INNER JOIN products ON products.productcode=grninfo.productcode WHERE grninfo.grncode LIKE '%" + searchTxt + "%' ORDER BY grnid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -618,7 +618,7 @@ public class ProductDAO {
 
     public ResultSet getSearchSalesQueryResult(String searchTxt) {
         try {
-            String query = "SELECT salesid,salesreport.productcode,productname,quantity,revenue,soldby FROM salesreport INNER JOIN products ON products.productcode=salesreport.productcode INNER JOIN customers ON customers.customercode=salesreport.customercode WHERE salesreport.productcode LIKE '%" + searchTxt + "%' OR productname LIKE '%" + searchTxt + "%' OR soldby LIKE '%" + searchTxt + "%' OR fullname LIKE '%" + searchTxt + "%' ORDER BY salesid";
+            String query = "SELECT salesid,issues.productcode,productname,quantity,revenue,soldby FROM issues INNER JOIN products ON products.productcode=issues.productcode INNER JOIN customers ON customers.customercode=issues.customercode WHERE issues.productcode LIKE '%" + searchTxt + "%' OR productname LIKE '%" + searchTxt + "%' OR soldby LIKE '%" + searchTxt + "%' OR fullname LIKE '%" + searchTxt + "%' ORDER BY salesid";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -638,7 +638,7 @@ public class ProductDAO {
 
     public ResultSet getPurchaseCode(String pcode) {
         try {
-            String query = "SELECT purchaseid FROM purchaseinfo WHERE purchaseid='" + pcode + "'";
+            String query = "SELECT purchasecode FROM purchaseinfo WHERE purchasecode='" + pcode + "'";
             rs = stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -649,7 +649,7 @@ public class ProductDAO {
     public String getProductsSupplier(String id) {
         String sup = null;
         try {
-            String query = "SELECT fullname FROM suppliers INNER JOIN purchaseinfo ON suppliers.suppliercode=purchaseinfo.suppliercode WHERE purchaseid='"+ id+"'";
+            String query = "SELECT fullname FROM suppliers INNER JOIN purchaseinfo ON suppliers.suppliercode=purchaseinfo.suppliercode WHERE purchasecode='"+ id+"'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 sup = rs.getString("fullname");
@@ -661,10 +661,10 @@ public class ProductDAO {
         return sup;
     }
 
-    public String getProductsSupplierGRN(int id) {
+    public String getProductsSupplierGRN(String id) {
         String sup = null;
         try {
-            String query = "SELECT fullname FROM suppliers INNER JOIN grninfo ON suppliers.suppliercode=grninfo.suppliercode WHERE poid='" + id + "'";
+            String query = "SELECT fullname FROM suppliers INNER JOIN grninfo ON suppliers.suppliercode=grninfo.suppliercode WHERE grncode='" + id + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 sup = rs.getString("fullname");
@@ -678,7 +678,7 @@ public class ProductDAO {
     public String getProductsCustomer(int id) {
         String cus = null;
         try {
-            String query = "SELECT fullname FROM customers INNER JOIN salesreport ON customers.customercode=salesreport.customercode WHERE salesid='" + id + "'";
+            String query = "SELECT fullname FROM customers INNER JOIN issues ON customers.customercode=issues.customercode WHERE salesid='" + id + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 cus = rs.getString("fullname");
@@ -689,10 +689,10 @@ public class ProductDAO {
         return cus;
     }
 
-    public String getOrderdDateGRN(int pur) {
+    public String getOrderdDateGRN(String pur) {
         String p = null;
         try {
-            String query = "SELECT date FROM grninfo WHERE poid='" + pur + "'";
+            String query = "SELECT date FROM grninfo WHERE grncode='" + pur + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 p = rs.getString("date");
@@ -706,7 +706,7 @@ public class ProductDAO {
     public String getOrderdDate(String pur) {
         String p = null;
         try {
-            String query = "SELECT date FROM purchaseinfo WHERE purchaseid='" + pur + "'";
+            String query = "SELECT date FROM purchaseinfo WHERE purchasecode='" + pur + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 p = rs.getString("date");
@@ -720,7 +720,7 @@ public class ProductDAO {
     public String getSoldDate(int salesid) {
         String p = null;
         try {
-            String query = "SELECT date FROM salesreport WHERE salesid='" + salesid + "'";
+            String query = "SELECT date FROM issues WHERE salesid='" + salesid + "'";
             rs = stmt.executeQuery(query);
             if (rs.next()) {
                 p = rs.getString("date");
