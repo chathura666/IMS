@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="issueid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     products.`productname` AS products_productname,
+     products.`brand` AS products_brand,
+     issues.`issuecode` AS issues_issuecode,
+     issues.`date` AS issues_date,
+     issues.`productcode` AS issues_productcode,
+     issues.`quantity` AS issues_quantity,
+     issues.`soldby` AS issues_soldby,
+     issues.`revenue` AS issues_revenue,
+     products.`sellingprice` AS products_sellingprice,
+     customers.`fullname` AS customers_fullname
+FROM
+     `products` products INNER JOIN `issues` issues ON products.`productcode` = issues.`productcode`
+     INNER JOIN `customers` customers ON issues.`customercode` = customers.`customercode`
+WHERE issuecode=$P{issueid}]]>
+	</queryString>
+	<field name="products_productname" class="java.lang.String"/>
+	<field name="products_brand" class="java.lang.String"/>
+	<field name="issues_issuecode" class="java.lang.String"/>
+	<field name="issues_date" class="java.lang.String"/>
+	<field name="issues_productcode" class="java.lang.String"/>
+	<field name="issues_quantity" class="java.lang.Integer"/>
+	<field name="issues_soldby" class="java.lang.String"/>
+	<field name="issues_revenue" class="java.lang.Double"/>
+	<field name="products_sellingprice" class="java.lang.Double"/>
+	<field name="customers_fullname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="172" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="50" width="87" height="15"/>
+				<textElement/>
+				<text><![CDATA[Issue Code:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="92" y="50" width="110" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{issues_issuecode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="360" y="104" width="83" height="15"/>
+				<textElement/>
+				<text><![CDATA[Sold By:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="443" y="104" width="97" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{issues_soldby}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="443" y="50" width="97" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{issues_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="358" y="50" width="85" height="15"/>
+				<textElement/>
+				<text><![CDATA[Issued Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="0" width="90" height="35"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="104" width="111" height="15"/>
+				<textElement/>
+				<text><![CDATA[Customers Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="111" y="104" width="164" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customers_fullname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="446" y="0" width="70" height="15"/>
+				<textElement/>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="116" y="0" width="84" height="15"/>
+				<textElement/>
+				<text><![CDATA[productname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="3" y="0" width="84" height="15"/>
+				<textElement/>
+				<text><![CDATA[productcode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="311" y="0" width="29" height="15"/>
+				<textElement/>
+				<text><![CDATA[price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="219" y="0" width="55" height="15"/>
+				<textElement/>
+				<text><![CDATA[Brand]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="384" y="0" width="22" height="15"/>
+				<textElement/>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="3" y="11" width="75" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{issues_productcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="114" y="11" width="86" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{products_productname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="219" y="11" width="74" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{products_brand}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="311" y="11" width="55" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{products_sellingprice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="446" y="12" width="55" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{issues_revenue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="384" y="12" width="52" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{issues_quantity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
