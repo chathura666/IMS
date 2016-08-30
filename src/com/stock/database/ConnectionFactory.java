@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,7 +61,7 @@ public class ConnectionFactory {
         port = prop.getProperty("port");
         username = prop.getProperty("dbuser");
         pw = prop.getProperty("dbpassword");
-//        host ="localhost";
+//        host = "10.12.31.1";
 //        database = "ims";
 //        port = "3306";
 //        username = "root";
@@ -72,17 +73,36 @@ public class ConnectionFactory {
             con = DriverManager.getConnection(url, username, pw);
             stmt = con.createStatement();
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//end of constructor ConnectionFactory
 
     //method Connection starts
     public Connection getConnection() {
         try {
+            input = new FileInputStream("config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // load a properties file
+            prop.load(input);
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        host = prop.getProperty("host");
+        database = prop.getProperty("database");
+        port = prop.getProperty("port");
+        username = prop.getProperty("dbuser");
+        pw = prop.getProperty("dbpassword");
+
+        try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, username, pw);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return con;
     }//end of method Connection
@@ -97,7 +117,7 @@ public class ConnectionFactory {
                     flag = true;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         } else {
             String query = "SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "'AND category='" + user + "'";
@@ -107,7 +127,7 @@ public class ConnectionFactory {
                     flag = true;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
         return flag;
