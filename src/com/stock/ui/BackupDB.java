@@ -123,7 +123,7 @@ public class BackupDB extends javax.swing.JFrame {
             
 
             //Backup with database
-            String executeCmd = "mysqldump -h " + host + " --port " + port + " -u " + user + " -p "+password+" --add-drop-database -B " + database + " -r \"" + backupPath + "" + filepath + "\"";
+            String executeCmd = "mysqldump -h " + host + " --port " + port + " -u " + user + " -p --add-drop-database -B " + database + " -r \"" + backupPath + "" + filepath + "\"";
             System.out.println(executeCmd);
             Process runtimeProcess = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", executeCmd});
 
