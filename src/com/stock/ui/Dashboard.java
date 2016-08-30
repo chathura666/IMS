@@ -238,7 +238,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         currentStocksBttn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        currentStocksBttn.setIcon(new javax.swing.ImageIcon("C:\\Users\\CHATHURA\\Desktop\\project\\InventoryManagementSystem-master\\src\\com\\stock\\ui\\images\\inventory-maintenance-icon.png")); // NOI18N
+        currentStocksBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/stock/ui/images/inventory-maintenance-icon.png"))); // NOI18N
         currentStocksBttn.setText("Current Stocks");
         currentStocksBttn.setToolTipText("Current Stocks");
         currentStocksBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -248,7 +248,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         salesReportBttn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        salesReportBttn.setIcon(new javax.swing.ImageIcon("C:\\Users\\CHATHURA\\Desktop\\project\\InventoryManagementSystem-master\\src\\com\\stock\\ui\\images\\Sell-48.png")); // NOI18N
+        salesReportBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/stock/ui/images/Sell-48.png"))); // NOI18N
         salesReportBttn.setText("Issues");
         salesReportBttn.setToolTipText("Issues");
         salesReportBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -267,7 +267,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         purchaseBttn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        purchaseBttn.setIcon(new javax.swing.ImageIcon("C:\\Users\\CHATHURA\\Desktop\\project\\InventoryManagementSystem-master\\src\\com\\stock\\ui\\images\\basket-icon.png")); // NOI18N
+        purchaseBttn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/stock/ui/images/basket-icon.png"))); // NOI18N
         purchaseBttn.setText("Purchase");
         purchaseBttn.setToolTipText("Purchase");
         purchaseBttn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -277,7 +277,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         purchaseBttn1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        purchaseBttn1.setIcon(new javax.swing.ImageIcon("C:\\Users\\CHATHURA\\Downloads\\Shipped-48.png")); // NOI18N
+        purchaseBttn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/stock/ui/images/Shipped-48.png"))); // NOI18N
         purchaseBttn1.setText("GRN");
         purchaseBttn1.setToolTipText("GRN");
         purchaseBttn1.addMouseListener(new java.awt.event.MouseAdapter() {

@@ -6,6 +6,7 @@
 package com.stock.database;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Statement;
@@ -13,6 +14,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,28 +31,41 @@ public class ConnectionFactory {
     ResultSet rs = null;
     boolean flag = false;
 
-    String username ;
-    String pw ;
+    String username;
+    String pw;
     String host;
     String database;
     String port;
     String driver = "com.mysql.jdbc.Driver";
-    String url ;
+    String url;
 
     //Constructor starts
     public ConnectionFactory() {
+
+        try {
+            input = new FileInputStream("config.properties");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // load a properties file
+            prop.load(input);
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         host = prop.getProperty("host");
         database = prop.getProperty("database");
         port = prop.getProperty("port");
         username = prop.getProperty("dbuser");
         pw = prop.getProperty("dbpassword");
-        host ="localhost";
-        database = "ims";
-        port = "3306";
-        username = "root";
-        pw = "root";
-        url = "jdbc:mysql://"+host+":"+port+"/"+database;
+//        host ="localhost";
+//        database = "ims";
+//        port = "3306";
+//        username = "root";
+//        pw = "root";
+        url = "jdbc:mysql://" + host + ":" + port + "/" + database;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");

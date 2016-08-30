@@ -345,7 +345,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\CHATHURA\Desktop\project\InventoryManagementSystem-master\src\com\stock\ui\images\inventory-maintenance-icon.png"/>
+              <Image iconType="3" name="/com/stock/ui/images/inventory-maintenance-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Current Stocks"/>
             <Property name="toolTipText" type="java.lang.String" value="Current Stocks"/>
@@ -360,7 +360,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\CHATHURA\Desktop\project\InventoryManagementSystem-master\src\com\stock\ui\images\Sell-48.png"/>
+              <Image iconType="3" name="/com/stock/ui/images/Sell-48.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Issues"/>
             <Property name="toolTipText" type="java.lang.String" value="Issues"/>
@@ -389,7 +389,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\CHATHURA\Desktop\project\InventoryManagementSystem-master\src\com\stock\ui\images\basket-icon.png"/>
+              <Image iconType="3" name="/com/stock/ui/images/basket-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Purchase"/>
             <Property name="toolTipText" type="java.lang.String" value="Purchase"/>
@@ -404,7 +404,7 @@
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\CHATHURA\Downloads\Shipped-48.png"/>
+              <Image iconType="3" name="/com/stock/ui/images/Shipped-48.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="GRN"/>
             <Property name="toolTipText" type="java.lang.String" value="GRN"/>

@@ -572,7 +572,7 @@ public class Issues extends javax.swing.JPanel {
             para.put("salesid", code);
             System.out.println(para);
             //portView = new ReportView();
-            reportView = new ReportView("C:\\Users\\CHATHURA\\Desktop\\project\\InventoryManagementSystem-master\\src\\com\\stock\\report\\IssueNote.jasper", para);
+            reportView = new ReportView("C:\\CEMS\\report\\IssueNote.jasper", para);
             reportView.setVisible(true);
         }
     }//GEN-LAST:event_printBttnMouseClicked

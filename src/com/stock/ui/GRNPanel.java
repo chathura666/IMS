@@ -671,7 +671,7 @@ public class GRNPanel extends javax.swing.JPanel {
             para.put("grncode", code);
             System.out.println(para);
             //portView = new ReportView();
-            reportView = new ReportView("C:\\Users\\CHATHURA\\Desktop\\project\\InventoryManagementSystem-master\\src\\com\\stock\\report\\GRN.jasper", para);
+            reportView = new ReportView("C:\\CEMS\\report\\GRN.jasper", para);
             reportView.setVisible(true);
         }
     }//GEN-LAST:event_printBttnMouseClicked
